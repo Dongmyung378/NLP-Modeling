@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md)
 
-Two end-to-end natural language processing projects covering representation learning, semantic similarity, recurrent networks, transformer fine-tuning, class imbalance, and ensemble inference. The repository is organized for portfolio review: each project has a focused overview, readable notebooks, data, final predictions, and the original task reference.
+Two end-to-end natural language processing projects covering representation learning, semantic similarity, recurrent networks, transformer fine-tuning, class imbalance, and ensemble inference. The repository is organized for portfolio review: each project has a focused overview, readable notebooks, reproducible environment requirements, data, and final predictions.
 
 ## Projects
 
@@ -10,6 +10,12 @@ Two end-to-end natural language processing projects covering representation lear
 | --- | --- | --- | ---: |
 | [Word Similarity](projects/word-similarity/) | Score the semantic similarity of word and phrase pairs | TF-IDF + character n-grams; FastText + phrase detection | 69.9% evaluation success rate |
 | [Multi-label Film Attribute Classification](projects/film-attribute-classification/) | Assign any combination of eight attributes to a film synopsis | BiLSTM + attention; RoBERTa; DeBERTa-v3 ensemble | 0.6253 weighted F1 |
+
+## Results at a glance
+
+| Word similarity | Film attribute classification |
+| --- | --- |
+| ![Word similarity model comparison](projects/word-similarity/assets/model-comparison.svg) | ![Film attribute classification model comparison](projects/film-attribute-classification/assets/model-comparison.svg) |
 
 ## Selected engineering work
 
@@ -27,26 +33,40 @@ Two end-to-end natural language processing projects covering representation lear
 ├── README.ko.md
 └── projects/
     ├── word-similarity/
+    │   ├── assets/
     │   ├── data/
     │   ├── notebooks/
-    │   ├── references/
     │   ├── results/
     │   ├── README.md
-    │   └── README.ko.md
+    │   ├── README.ko.md
+    │   └── requirements.txt
     └── film-attribute-classification/
+        ├── assets/
         ├── data/
         ├── notebooks/
-        ├── references/
         ├── results/
         ├── README.md
-        └── README.ko.md
+        ├── README.ko.md
+        └── requirements.txt
 ```
 
 ## Reproducing the work
 
-1. Open the README for the project you want to explore.
-2. Start Jupyter from that project directory so the relative `data/` and `results/` paths resolve correctly.
-3. Install the dependencies listed in the notebook and run the cells in order.
+Each project has its own dependency file. From the selected project directory, create and activate an isolated Python 3.10 or 3.11 environment, then launch Jupyter:
+
+```bash
+python -m venv .venv
+
+# Activate one environment:
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+# macOS/Linux:        source .venv/bin/activate
+
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m jupyter lab
+```
+
+Project-specific data placement, NLTK resources, model downloads, and GPU notes are documented in each project README.
 
 The Word Similarity project additionally requires a local WikiText-103 text file. The film-classification notebooks download model or embedding assets on first use, and the transformer experiments are intended for a CUDA-capable GPU.
 
@@ -56,4 +76,4 @@ Notebook outputs and execution counters are intentionally cleared for fast revie
 
 Daily notes, private work logs, scratch experiments, checkpoints, downloaded model weights, experiment trackers, and generated validation predictions are excluded through `.gitignore`. The local submission archives are preserved under the ignored `.local/` directory and will not be uploaded to GitHub.
 
-This repository contains academic project work. The task briefs are retained only as project references; no license is granted for third-party datasets or course materials.
+These systems were developed as university projects and curated here as engineering case studies. The academic origin provides the problem context; the portfolio documentation focuses on implementation decisions, measured results, trade-offs, and reproducibility.

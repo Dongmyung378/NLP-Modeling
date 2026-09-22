@@ -20,6 +20,8 @@ The work compares a recurrent baseline with two pretrained transformer pipelines
 
 The strongest individual DeBERTa-v3 seed reached 0.6223; the table reports the final ensemble score. On this dataset, RoBERTa-base delivered the best validation result despite the more elaborate DeBERTa pipeline.
 
+![Film attribute classification model comparison](assets/model-comparison.svg)
+
 ## Engineering decisions
 
 ### Class imbalance
@@ -52,19 +54,37 @@ Each record contains an ID, title, and plot synopsis. The labelled splits includ
 
 ```text
 film-attribute-classification/
+├── assets/        # Portfolio visualizations
 ├── data/          # Train, validation, and test CSV files
 ├── notebooks/     # BiLSTM, RoBERTa, and DeBERTa pipelines
-├── references/    # Original task brief
 ├── results/       # Final test predictions for all three models
 ├── README.md
-└── README.ko.md
+├── README.ko.md
+└── requirements.txt
 ```
 
 ## Running the notebooks
 
-Start Jupyter in this directory so that the relative paths resolve correctly. Run the installation and import cells first, then execute the selected pipeline in order. The BiLSTM notebook downloads GloVe embeddings; the transformer notebooks download pretrained Hugging Face models. A CUDA-capable GPU is strongly recommended.
+Use Python 3.10 or 3.11. From this project directory:
 
-Checkpoints, downloaded weights, experiment trackers, raw logs, and intermediate validation predictions are intentionally excluded from Git. Clean final predictions are retained in [`results/`](results/).
+```bash
+python -m venv .venv
+
+# Activate one environment:
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+# macOS/Linux:        source .venv/bin/activate
+
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m nltk.downloader punkt punkt_tab stopwords wordnet omw-1.4
+python -m jupyter lab
+```
+
+Open the selected notebook and run its cells in order. The notebooks read `data/train.csv`, `data/validation.csv`, and `data/test.csv`. The BiLSTM notebook downloads GloVe embeddings; the transformer notebooks download pretrained Hugging Face models.
+
+A CUDA-capable GPU is strongly recommended for transformer training. When using CUDA, install the PyTorch wheel appropriate for the local CUDA version before installing `requirements.txt`; the remaining command will reuse that installation. Hardware, PyTorch, and CUDA differences can still introduce small numerical variation even with fixed seeds.
+
+Checkpoints, downloaded weights, experiment trackers, raw logs, and intermediate validation predictions are intentionally excluded from Git. Clean reference predictions are retained in [`results/`](results/).
 
 ## Takeaway
 

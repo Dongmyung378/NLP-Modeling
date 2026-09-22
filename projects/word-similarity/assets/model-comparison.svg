@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" viewBox="0 0 800 420">
+  <title id="title">Word similarity model comparison</title>
+  <desc id="desc">FastText with phrase detection scored 69.9 percent and TF-IDF with character n-grams scored 68.0 percent on the ordering-based evaluation.</desc>
+  <rect width="800" height="420" rx="24" fill="#f8fafc"/>
+  <text x="48" y="54" fill="#0f172a" font-family="Arial, sans-serif" font-size="28" font-weight="700">Word Similarity</text>
+  <text x="48" y="84" fill="#64748b" font-family="Arial, sans-serif" font-size="16">Ordering-based evaluation success rate (%)</text>
+
+  <line x1="210" y1="332" x2="710" y2="332" stroke="#cbd5e1" stroke-width="2"/>
+  <g fill="#64748b" font-family="Arial, sans-serif" font-size="13" text-anchor="middle">
+    <text x="210" y="356">0</text>
+    <text x="310" y="356">20</text>
+    <text x="410" y="356">40</text>
+    <text x="510" y="356">60</text>
+    <text x="610" y="356">80</text>
+    <text x="710" y="356">100</text>
+  </g>
+  <g stroke="#e2e8f0" stroke-width="1">
+    <line x1="310" y1="118" x2="310" y2="332"/>
+    <line x1="410" y1="118" x2="410" y2="332"/>
+    <line x1="510" y1="118" x2="510" y2="332"/>
+    <line x1="610" y1="118" x2="610" y2="332"/>
+    <line x1="710" y1="118" x2="710" y2="332"/>
+  </g>
+
+  <g font-family="Arial, sans-serif">
+    <text x="190" y="174" fill="#334155" font-size="16" text-anchor="end">TF-IDF + char n-grams</text>
+    <rect x="210" y="145" width="340" height="44" rx="8" fill="#64748b"/>
+    <text x="562" y="174" fill="#0f172a" font-size="18" font-weight="700">68.0%</text>
+
+    <text x="190" y="264" fill="#334155" font-size="16" text-anchor="end">FastText + phrases</text>
+    <rect x="210" y="235" width="349.5" height="44" rx="8" fill="#2563eb"/>
+    <text x="572" y="264" fill="#1d4ed8" font-size="18" font-weight="700">69.9%</text>
+  </g>
+
+  <rect x="596" y="112" width="142" height="72" rx="14" fill="#dbeafe"/>
+  <text x="667" y="140" fill="#1e40af" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">FastText gain</text>
+  <text x="667" y="169" fill="#1d4ed8" font-family="Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle">+1.9 pp</text>
+</svg>

@@ -15,6 +15,8 @@ This project estimates the semantic similarity of word and phrase pairs from rep
 
 The reported success rate comes from the ordering-based example evaluator included in the original work. It should not be interpreted as a general benchmark accuracy.
 
+![Word similarity model comparison](assets/model-comparison.svg)
+
 ## Engineering decisions
 
 ### Sparse hybrid model
@@ -35,23 +37,39 @@ The reported success rate comes from the ordering-based example evaluator includ
 
 ```text
 word-similarity/
+├── assets/        # Portfolio visualizations
 ├── data/          # Example, gold-standard, and test word pairs
 ├── notebooks/     # Portfolio-ready source notebooks
-├── references/    # Original and revised task briefs
 ├── results/       # Final prediction CSV files
 ├── README.md
-└── README.ko.md
+├── README.ko.md
+└── requirements.txt
 ```
 
 ## Running the notebooks
 
-Start Jupyter in this directory and open the desired notebook. The notebooks expect:
+Use Python 3.10 or 3.11. From this project directory:
+
+```bash
+python -m venv .venv
+
+# Activate one environment:
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+# macOS/Linux:        source .venv/bin/activate
+
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m nltk.downloader punkt punkt_tab stopwords wordnet omw-1.4
+python -m jupyter lab
+```
+
+Open the desired notebook and run its cells in order. The notebooks expect:
 
 - Python with `pandas`, `numpy`, `scikit-learn`, `scipy`, `nltk`, and `gensim` for the FastText model;
 - a WikiText-103 text file at `data/WikiText-103.txt`;
-- the included CSV files under `data/`.
+- the included `example-pairs.csv`, `example-pairs-gold.csv`, and `test-pairs.csv` files under `data/`.
 
-Downloaded corpora, generated predictions, caches, and experimental artifacts are intentionally ignored by Git. The committed notebooks have no execution output; the result files are available in [`results/`](results/).
+The WikiText corpus, generated predictions, caches, and experimental artifacts are intentionally ignored by Git. The committed notebooks have no execution output; the reference result files are available in [`results/`](results/). CPU execution is supported, but training time depends heavily on corpus size and worker count.
 
 ## Limitations
 

@@ -2,7 +2,7 @@
 
 [English](README.md) | [한국어](README.ko.md)
 
-표현 학습, 의미 유사도, 순환 신경망, 트랜스포머 파인튜닝, 클래스 불균형 처리, 앙상블 추론을 다루는 두 개의 자연어 처리 프로젝트입니다. 포트폴리오 검토에 적합하도록 각 프로젝트를 개요, 정리된 노트북, 데이터, 최종 예측 결과, 원 과제 참고 자료로 구분했습니다.
+표현 학습, 의미 유사도, 순환 신경망, 트랜스포머 파인튜닝, 클래스 불균형 처리, 앙상블 추론을 다루는 두 개의 자연어 처리 프로젝트입니다. 포트폴리오 검토에 적합하도록 각 프로젝트를 개요, 정리된 노트북, 재현 가능한 환경 명세, 데이터, 최종 예측 결과로 구분했습니다.
 
 ## 프로젝트
 
@@ -10,6 +10,12 @@
 | --- | --- | --- | ---: |
 | [단어 유사도](projects/word-similarity/README.ko.md) | 단어 및 구문 쌍의 의미 유사도 점수 예측 | TF-IDF + 문자 n-gram, FastText + 구문 탐지 | 평가 성공률 69.9% |
 | [영화 속성 다중 레이블 분류](projects/film-attribute-classification/README.ko.md) | 영화 줄거리에 8개 속성을 복수로 분류 | BiLSTM + 어텐션, RoBERTa, DeBERTa-v3 앙상블 | weighted F1 0.6253 |
+
+## 결과 요약
+
+| 단어 유사도 | 영화 속성 다중 레이블 분류 |
+| --- | --- |
+| ![단어 유사도 모델 비교](projects/word-similarity/assets/model-comparison.svg) | ![영화 속성 분류 모델 비교](projects/film-attribute-classification/assets/model-comparison.svg) |
 
 ## 주요 엔지니어링 작업
 
@@ -27,26 +33,40 @@
 ├── README.ko.md
 └── projects/
     ├── word-similarity/
+    │   ├── assets/
     │   ├── data/
     │   ├── notebooks/
-    │   ├── references/
     │   ├── results/
     │   ├── README.md
-    │   └── README.ko.md
+    │   ├── README.ko.md
+    │   └── requirements.txt
     └── film-attribute-classification/
+        ├── assets/
         ├── data/
         ├── notebooks/
-        ├── references/
         ├── results/
         ├── README.md
-        └── README.ko.md
+        ├── README.ko.md
+        └── requirements.txt
 ```
 
 ## 실행 방법
 
-1. 살펴볼 프로젝트의 README를 엽니다.
-2. 상대 경로인 `data/`와 `results/`가 올바르게 해석되도록 해당 프로젝트 디렉터리에서 Jupyter를 실행합니다.
-3. 노트북에 적힌 의존성을 설치한 뒤 셀을 순서대로 실행합니다.
+각 프로젝트는 별도의 의존성 파일을 제공합니다. 선택한 프로젝트 디렉터리에서 Python 3.10 또는 3.11 격리 환경을 만들고 활성화한 뒤 Jupyter를 실행합니다.
+
+```bash
+python -m venv .venv
+
+# 환경 하나를 활성화합니다.
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+# macOS/Linux:        source .venv/bin/activate
+
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m jupyter lab
+```
+
+프로젝트별 데이터 위치, NLTK 리소스, 모델 다운로드, GPU 참고 사항은 각 프로젝트 README에 정리했습니다.
 
 단어 유사도 프로젝트는 별도의 WikiText-103 텍스트 파일이 필요합니다. 영화 분류 노트북은 최초 실행 시 모델 또는 임베딩 자산을 내려받으며, 트랜스포머 실험에는 CUDA 지원 GPU 사용을 권장합니다.
 
@@ -56,4 +76,4 @@
 
 일일 기록, 비공개 작업 로그, 임시 실험, 체크포인트, 내려받은 모델 가중치, 실험 추적 도구 파일, 실행 중 생성되는 검증 예측은 `.gitignore`로 제외합니다. 제출용 압축 파일은 Git에서 제외되는 `.local/` 디렉터리에 로컬 사본으로 보존되어 GitHub에 업로드되지 않습니다.
 
-이 저장소는 학업 프로젝트 결과물을 포함합니다. 과제 안내서는 프로젝트 참고용으로만 보관하며 제3자 데이터셋이나 교육 자료에 대한 라이선스를 부여하지 않습니다.
+이 시스템들은 대학 프로젝트로 개발한 뒤 엔지니어링 사례 연구 형태로 정리했습니다. 대학 프로젝트라는 배경은 문제의 맥락을 제공하며, 포트폴리오 문서는 구현 판단, 측정 결과, 트레이드오프, 재현성에 초점을 둡니다.

@@ -20,6 +20,8 @@
 
 DeBERTa-v3의 최고 단일 시드는 0.6223을 기록했으며 표에는 최종 앙상블 점수를 적었습니다. 이 데이터셋에서는 더 복잡한 DeBERTa 파이프라인보다 RoBERTa-base가 가장 높은 검증 성능을 보였습니다.
 
+![영화 속성 분류 모델 비교](assets/model-comparison.svg)
+
 ## 엔지니어링 설계
 
 ### 클래스 불균형
@@ -52,19 +54,37 @@ DeBERTa-v3의 최고 단일 시드는 0.6223을 기록했으며 표에는 최종
 
 ```text
 film-attribute-classification/
+├── assets/        # 포트폴리오 시각자료
 ├── data/          # 학습, 검증, 테스트 CSV
 ├── notebooks/     # BiLSTM, RoBERTa, DeBERTa 파이프라인
-├── references/    # 원 과제 안내서
 ├── results/       # 세 모델의 최종 테스트 예측
 ├── README.md
-└── README.ko.md
+├── README.ko.md
+└── requirements.txt
 ```
 
 ## 노트북 실행
 
-상대 경로가 올바르게 해석되도록 이 디렉터리에서 Jupyter를 시작합니다. 설치 및 import 셀을 먼저 실행한 뒤 선택한 파이프라인을 순서대로 실행합니다. BiLSTM 노트북은 GloVe 임베딩을, 트랜스포머 노트북은 Hugging Face 사전학습 모델을 내려받습니다. CUDA 지원 GPU 사용을 권장합니다.
+Python 3.10 또는 3.11을 사용합니다. 이 프로젝트 디렉터리에서 다음 명령을 실행합니다.
 
-체크포인트, 내려받은 가중치, 실험 추적 도구 파일, 원시 로그, 중간 검증 예측은 Git에서 제외합니다. 정리된 최종 예측은 [`results/`](results/)에 유지했습니다.
+```bash
+python -m venv .venv
+
+# 환경 하나를 활성화합니다.
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+# macOS/Linux:        source .venv/bin/activate
+
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m nltk.downloader punkt punkt_tab stopwords wordnet omw-1.4
+python -m jupyter lab
+```
+
+선택한 노트북을 열어 셀을 순서대로 실행합니다. 노트북은 `data/train.csv`, `data/validation.csv`, `data/test.csv`를 읽습니다. BiLSTM 노트북은 GloVe 임베딩을, 트랜스포머 노트북은 Hugging Face 사전학습 모델을 내려받습니다.
+
+트랜스포머 학습에는 CUDA 지원 GPU 사용을 권장합니다. CUDA를 사용할 때는 로컬 CUDA 버전에 맞는 PyTorch wheel을 `requirements.txt`보다 먼저 설치하면 나머지 설치 과정에서 해당 버전을 재사용합니다. 시드를 고정해도 하드웨어, PyTorch, CUDA 차이로 작은 수치 변동이 생길 수 있습니다.
+
+체크포인트, 내려받은 가중치, 실험 추적 도구 파일, 원시 로그, 중간 검증 예측은 Git에서 제외합니다. 정리된 기준 예측은 [`results/`](results/)에 유지했습니다.
 
 ## 결론
 

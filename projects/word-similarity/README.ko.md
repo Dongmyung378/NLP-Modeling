@@ -15,6 +15,8 @@ WikiText-103에서 학습한 표현을 바탕으로 단어 및 구문 쌍의 의
 
 보고된 성공률은 원 작업에 포함된 순위 기반 예제 평가기에서 나온 값이며, 일반적인 벤치마크 정확도로 해석해서는 안 됩니다.
 
+![단어 유사도 모델 비교](assets/model-comparison.svg)
+
 ## 엔지니어링 설계
 
 ### 희소 하이브리드 모델
@@ -35,23 +37,39 @@ WikiText-103에서 학습한 표현을 바탕으로 단어 및 구문 쌍의 의
 
 ```text
 word-similarity/
+├── assets/        # 포트폴리오 시각자료
 ├── data/          # 예제, 정답, 테스트 단어 쌍
 ├── notebooks/     # 포트폴리오용 소스 노트북
-├── references/    # 원본 및 개정 과제 안내서
 ├── results/       # 최종 예측 CSV
 ├── README.md
-└── README.ko.md
+├── README.ko.md
+└── requirements.txt
 ```
 
 ## 노트북 실행
 
-이 디렉터리에서 Jupyter를 시작하고 원하는 노트북을 엽니다. 다음 항목이 필요합니다.
+Python 3.10 또는 3.11을 사용합니다. 이 프로젝트 디렉터리에서 다음 명령을 실행합니다.
+
+```bash
+python -m venv .venv
+
+# 환경 하나를 활성화합니다.
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+# macOS/Linux:        source .venv/bin/activate
+
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m nltk.downloader punkt punkt_tab stopwords wordnet omw-1.4
+python -m jupyter lab
+```
+
+원하는 노트북을 열어 셀을 순서대로 실행합니다. 다음 항목이 필요합니다.
 
 - Python 및 `pandas`, `numpy`, `scikit-learn`, `scipy`, `nltk`, FastText 모델용 `gensim`
 - `data/WikiText-103.txt`에 위치한 WikiText-103 텍스트 파일
-- `data/`에 포함된 CSV 파일
+- `data/`에 포함된 `example-pairs.csv`, `example-pairs-gold.csv`, `test-pairs.csv`
 
-내려받은 말뭉치, 실행 중 생성되는 예측, 캐시, 실험 산출물은 Git에서 제외됩니다. 커밋된 노트북에는 실행 출력이 없으며 결과 파일은 [`results/`](results/)에서 확인할 수 있습니다.
+WikiText 말뭉치, 실행 중 생성되는 예측, 캐시, 실험 산출물은 Git에서 제외됩니다. 커밋된 노트북에는 실행 출력이 없으며 기준 결과 파일은 [`results/`](results/)에서 확인할 수 있습니다. CPU에서도 실행할 수 있지만 학습 시간은 말뭉치 크기와 워커 수에 크게 좌우됩니다.
 
 ## 한계
 
