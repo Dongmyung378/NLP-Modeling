@@ -1,0 +1,72 @@
+# Local-only material and private work records
+.local/
+private/
+notes/
+daily/
+daily-notes/
+worklogs/
+lab-notes/
+research-notes/
+scratch/
+daily-*.md
+worklog-*.md
+experiment-notes*.md
+internal-*.md
+*_internal.md
+*_일지.md
+*_실험기록.md
+일지/
+작업일지/
+실험기록/
+
+# Internal experiments and generated artifacts
+experiments/
+runs/
+outputs/
+artifacts/
+checkpoints/
+wandb/
+mlruns/
+lightning_logs/
+tensorboard/
+*.log
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*_validation_results.csv
+*_results_prediction.csv
+portfolio_*.csv
+
+# Downloaded corpora and embeddings
+**/data/WikiText-103.txt
+**/glove.6B*
+
+# Submission packages and compressed downloads
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# Python and Jupyter caches
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments and secrets
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
